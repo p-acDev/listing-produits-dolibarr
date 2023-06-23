@@ -25,6 +25,7 @@ df_produit.reset_index(inplace=True)
 df_service = df[df["Type"] == "Service"]
 df_service.reset_index(inplace=True)
 
+col1, col2 = st.columns(2)
 
 with col1:
 
