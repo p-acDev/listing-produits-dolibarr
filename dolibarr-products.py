@@ -46,6 +46,9 @@ with col2:
         with st.expander(f"## **{df_service.iloc[i]['Label']}**"):
             st.markdown(f"- **Ref**: {df_service.iloc[i]['Ref.']}")
             st.markdown(f"- **Durée**: {df_service.iloc[i]['Durée (si service)']}")
-            st.markdown(f"- **Prix € (TTC)**: {df_service.iloc[i]['Prix € (TTC)']}")
+            if df_service.iloc[i]['Ref.'] in st.secrets['EXCLUDED_PRICE_REF']:
+                st.markdown(f"- **Prix € (TTC)**: à *discuter*")
+            else:
+                st.markdown(f"- **Prix € (TTC)**: {df_service.iloc[i]['Prix € (TTC)']}")
             st.markdown(f"- **Description**:")
             st.markdown(df_service.iloc[i]['Description'])
