@@ -26,19 +26,23 @@ df_service = df[df["Type"] == "Service"]
 df_service.reset_index(inplace=True)
 
 
-st.write("## Liste de mes produits")
-for i in range(len(df_produit)):
-    with st.expander(f"## **{df_produit.iloc[i]['Label']}**"):
-        st.markdown(f"- **Ref**: {df_produit.iloc[i]['Ref.']}")
-        st.markdown(f"- **Prix € (TTC)**: {df_produit.iloc[i]['Prix € (TTC)']}")
-        st.markdown(f"- **Description**:")
-        st.markdown(df.iloc[i]['Description'])
+with col1:
 
-st.write("## Liste de mes services")
-for i in range(len(df_service)):
-    with st.expander(f"## **{df_service.iloc[i]['Label']}**"):
-        st.markdown(f"- **Ref**: {df_service.iloc[i]['Ref.']}")
-        st.markdown(f"- **Durée**: {df_service.iloc[i]['Durée (si service)']}")
-        st.markdown(f"- **Prix € (TTC)**: {df_service.iloc[i]['Prix € (TTC)']}")
-        st.markdown(f"- **Description**:")
-        st.markdown(df.iloc[i]['Description'])
+    st.write("## Liste de mes produits")
+    for i in range(len(df_produit)):
+        with st.expander(f"## **{df_produit.iloc[i]['Label']}**"):
+            st.markdown(f"- **Ref**: {df_produit.iloc[i]['Ref.']}")
+            st.markdown(f"- **Prix € (TTC)**: {df_produit.iloc[i]['Prix € (TTC)']}")
+            st.markdown(f"- **Description**:")
+            st.markdown(df.iloc[i]['Description'])
+
+with col2:
+
+    st.write("## Liste de mes services")
+    for i in range(len(df_service)):
+        with st.expander(f"## **{df_service.iloc[i]['Label']}**"):
+            st.markdown(f"- **Ref**: {df_service.iloc[i]['Ref.']}")
+            st.markdown(f"- **Durée**: {df_service.iloc[i]['Durée (si service)']}")
+            st.markdown(f"- **Prix € (TTC)**: {df_service.iloc[i]['Prix € (TTC)']}")
+            st.markdown(f"- **Description**:")
+            st.markdown(df.iloc[i]['Description'])
