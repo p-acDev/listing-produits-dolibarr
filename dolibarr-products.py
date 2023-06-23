@@ -12,7 +12,7 @@ response = requests.request("GET", url)
 df = pd.DataFrame(response.json())
 df = df[["ref", "type", "label", "duration", "description", "price_ttc"]]
 
-# a bit a cleaning
+# a bit of cleaning
 df["type"] = df["type"].apply(lambda x: "Produit" if x == '0' else "Service")
 df["price_ttc"] = df["price_ttc"].apply(lambda x: round(float(x), 2))
 df["description"] = df["description"].apply(lambda x: html.unescape(x))
@@ -22,8 +22,10 @@ df.sort_values(by=["Type", "Label"], inplace=True)
 
 df_produit = df[df["Type"] == "Produit"]
 df_produit.reset_index(inplace=True)
+print(df_produit)
 df_service = df[df["Type"] == "Service"]
 df_service.reset_index(inplace=True)
+print(df_service)
 
 col1, col2 = st.columns(2)
 
@@ -35,7 +37,7 @@ with col1:
             st.markdown(f"- **Ref**: {df_produit.iloc[i]['Ref.']}")
             st.markdown(f"- **Prix € (TTC)**: {df_produit.iloc[i]['Prix € (TTC)']}")
             st.markdown(f"- **Description**:")
-            st.markdown(df.iloc[i]['Description'])
+            st.markdown(df_produit.iloc[i]['Description'])
 
 with col2:
 
@@ -46,4 +48,4 @@ with col2:
             st.markdown(f"- **Durée**: {df_service.iloc[i]['Durée (si service)']}")
             st.markdown(f"- **Prix € (TTC)**: {df_service.iloc[i]['Prix € (TTC)']}")
             st.markdown(f"- **Description**:")
-            st.markdown(df.iloc[i]['Description'])
+            st.markdown(df_service.iloc[i]['Description'])
